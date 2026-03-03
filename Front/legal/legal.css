@@ -1,0 +1,88 @@
+/* ====================================
+   ESTILO GENERAL PARA PÁGINAS LEGALES
+   Acorde con el diseño de PendiNails
+==================================== */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #ffb6c1, #ffcce0);
+    color: #111;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.legal-container {
+    max-width: 900px;
+    margin: 80px auto;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 50px 60px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Título principal */
+.legal-container h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #111;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Subtítulos */
+.legal-container h3 {
+    margin-top: 35px;
+    color: #c2185b;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+/* Texto */
+.legal-container p,
+.legal-container li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #111;
+}
+
+/* Listas */
+.legal-container ul {
+    padding-left: 20px;
+}
+
+/* Separador elegante */
+.legal-separator {
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(to right, #c2185b, #ffb6c1);
+    border-radius: 3px;
+    margin: 25px 0 40px 0;
+}
+
+/* Enlaces */
+.legal-container a {
+    color: #c2185b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.legal-container a:hover {
+    color: #880e4f;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .legal-container {
+        padding: 30px 25px;
+        margin: 40px 15px;
+    }
+
+    .legal-container h1 {
+        font-size: 2.4rem;
+    }
+}

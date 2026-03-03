@@ -1,0 +1,296 @@
+/* ====================================
+    1. BASE Y CONFIGURACIÓN GENERAL
+====================================
+*/
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    color: #111;
+    overflow-x: hidden;
+}
+
+/* ====================================
+    2. NAVEGACIÓN (Navbar)
+====================================
+*/
+.navbar {
+    position: relative; 
+    width: 100%;
+    background-color: #111;
+    height: 55px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.navbar-brand, .nav-link {
+    color: #ffb6c1 !important; 
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-family: 'Great Vibes', cursive;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #fff !important;
+}
+
+.navbar-nav { flex-direction: row; }
+
+@media (max-width: 768px) {
+    .navbar-nav { display: none; }
+}
+
+/* ====================================
+    3. HERO SECTION
+====================================
+*/
+.hero {
+    background: linear-gradient(135deg, #ffb6c1, #ffcce0);
+    color: #111;
+    padding: 100px 20px; 
+}
+
+.hero h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.hero-img {
+    display: block;
+    max-width: 350px; 
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.btn-elegante {
+    position: relative;
+    display: inline-block;
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: #111; 
+    border: 2px solid #ffb6c1; 
+    border-radius: 30px;
+    text-decoration: none;
+    overflow: hidden; 
+    transition: all 0.3s ease;
+    z-index: 1; 
+}
+
+.btn-elegante:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ====================================
+    4. FILTROS (Borde Fino Rosa Oscuro)
+====================================
+*/
+#destacados .card, #productos .card {
+    background: #ffffff !important;
+    border: 1px solid #eee !important;
+    border-radius: 20px !important;
+    padding: 25px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important;
+}
+
+/* Input y Select con borde rosa oscuro #c2185b */
+#buscarNombre, #filtroCategoria {
+    background-color: #ffffff !important;
+    border: 1px solid #c2185b !important;
+    border-radius: 12px !important;
+    color: #111 !important;
+    height: 58px;
+    transition: all 0.3s ease !important;
+}
+
+#buscarNombre:focus, #filtroCategoria:focus {
+    border-width: 1.5px !important;
+    border-color: #880e4f !important;
+    box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.1) !important;
+}
+
+/* Label en rosa oscuro */
+.form-floating > label {
+    color: #c2185b !important;
+    font-weight: 500;
+    padding-left: 15px;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+    color: #880e4f !important;
+    opacity: 0.9;
+}
+
+/* Botón Ver Todos */
+#btnTodos {
+    background-color: #111 !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    border: none !important;
+    font-weight: 600 !important;
+    height: 58px;
+    transition: all 0.3s ease !important;
+}
+
+#btnTodos:hover {
+    background-color: #c2185b !important;
+    color: #fff !important;
+}
+
+/* Flecha del select rosa oscuro */
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c2185b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/* ====================================
+    5. CARRUSEL Y PRODUCTOS
+====================================
+*/
+#pendinailsSwiper {
+    width: 100%;
+    padding: 50px 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.producto-slide-content {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 18px;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.carousel-img {
+    border: 4px solid #ffb6c1;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    max-height: 250px;
+    object-fit: cover;
+    margin: auto;
+}
+
+/* Estilo Grid cuando hay pocos productos */
+#swiperWrapper.justify-content-center .swiper-slide {
+    margin: 15px;
+}
+
+.carrusel-desactivado .swiper-button-next,
+.carrusel-desactivado .swiper-button-prev,
+.carrusel-desactivado .swiper-pagination {
+    display: none !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #c2185b !important;
+}
+
+/* ====================================
+    6. OTROS (Contacto, Footer, Scroll)
+====================================
+*/
+#contacto .card {
+    background-color: #fff !important;
+    border: 1px solid #c2185b !important;
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+#contacto h2 { color: #880e4f; font-weight: 600; }
+
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+}
+
+.scroll-top svg {
+    width: 40px;
+    height: 40px;
+    stroke: #111;
+}
+
+footer {
+    background-color: #111;
+    color: #ffb6c1;
+    padding: 25px;
+    text-align: center;
+}
+
+
+.contacto-section {
+    background: linear-gradient(135deg, #ffb6c1, #ffcce0); /* Mismo que Hero */
+    padding: 100px 20px;
+    color: #111;
+}
+
+.contacto-wrapper {
+    background: rgba(255, 255, 255, 0.6); /* Un poco más opaco por seguridad */
+    -webkit-backdrop-filter: blur(10px);   /* Prefijo para Safari/Chrome antiguos */
+    backdrop-filter: blur(10px);           /* Estándar moderno */
+    padding: 50px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 576px) {
+    .form-floating > label {
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        font-size: 1rem;
+        padding: 1rem 0.75rem;
+    }
+
+    textarea.form-control {
+        height: auto !important;
+    }
+}
+
+
+/* Soporte para navegadores que no aceptan blur (como Internet Explorer) */
+@supports not (backdrop-filter: blur(10px)) {
+    .contacto-wrapper {
+        background: rgba(255, 255, 255, 0.95); /* Fondo sólido si falla el desenfoque */
+    }
+}
+
+.contacto-section h2 {
+    font-family: 'Great Vibes', cursive;
+    color: #111;
+}
+
+/* Ajuste de inputs para que no pierdan el estilo rosa oscuro que creamos */
+.contacto-section .form-control {
+    background-color: #ffffff !important;
+    border: 1px solid #c2185b !important;
+    border-radius: 12px !important;
+}
+
+.contacto-section .form-control:focus {
+    box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.1) !important;
+}
+
+.contacto-section label {
+    color: #c2185b !important;
+}

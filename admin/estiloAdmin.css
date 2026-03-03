@@ -1,0 +1,233 @@
+/* 🎨 Paleta elegante */
+:root {
+  --rosa-claro: #f8d7da;
+  --rosa-medio: #e75480;
+  --rosa-oscuro: #c2185b;
+  --blanco: #ffffff;
+  --negro: #000000;
+  --gris-suave: #f2f2f2;
+}
+
+/* 🔄 Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--blanco);
+  color: var(--negro);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* 🗂️ Tarjetas */
+.card {
+  border: 1px solid var(--rosa-oscuro);
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background-color: var(--gris-suave);
+}
+
+.card-header {
+  background: linear-gradient(90deg, var(--rosa-oscuro), var(--rosa-medio));
+  color: var(--blanco);
+  padding: 12px 16px;
+  font-weight: bold;
+  font-size: 1.3em;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* 📊 Tablas */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+
+.table th, .table td {
+  border: 1px solid var(--rosa-oscuro);
+  padding: 10px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table thead th {
+  background-color: var(--rosa-claro);
+  color: var(--negro);
+  font-weight: bold;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--gris-suave);
+}
+
+.table tbody tr:hover {
+  background-color: var(--rosa-medio);
+  color: var(--blanco);
+  transition: 0.3s ease;
+}
+
+/* 📐 Anchos específicos */
+.table.categorias th:nth-child(1),
+.table.categorias td:nth-child(1) { width: 5%; }
+
+.table.categorias th:nth-child(2),
+.table.categorias td:nth-child(2) { width: 25%; }
+
+.table.categorias th:nth-child(3),
+.table.categorias td:nth-child(3) { width: 55%; }
+
+.table.categorias th:nth-child(4),
+.table.categorias td:nth-child(4) { width: 15%; }
+
+.table.productos th:nth-child(1),
+.table.productos td:nth-child(1) { width: 5%; }
+
+.table.productos th:nth-child(2),
+.table.productos td:nth-child(2) { width: 10%; }
+
+.table.productos th:nth-child(3),
+.table.productos td:nth-child(3) { width: 25%; }
+
+.table.productos th:nth-child(4),
+.table.productos td:nth-child(4) { width: 10%; }
+
+.table.productos th:nth-child(5),
+.table.productos td:nth-child(5) { width: 7%; }
+
+.table.productos th:nth-child(6),
+.table.productos td:nth-child(6) { width: 13%; }
+
+.table.productos th:nth-child(7),
+.table.productos td:nth-child(7) { width: 10%; }
+
+.table.productos th:nth-child(8),
+.table.productos td:nth-child(8) { width: 5%; }
+
+.table.productos th:nth-child(9),
+.table.productos td:nth-child(9) { width: 15%; }
+
+/* ✏️ Inputs */
+input[type="text"],
+input[type="number"],
+select {
+  width: 95%;
+  padding: 8px;
+  border: 1px solid var(--rosa-oscuro);
+  border-radius: 4px;
+  background-color: var(--blanco);
+  color: var(--negro);
+}
+
+input[type="file"] {
+  border: none;
+  background-color: transparent;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* 🔘 Botones base */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;          /* más espacio para que no se vea solo el icono */
+  border-radius: 6px;         /* esquinas redondeadas */
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto hover común */
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* 🎨 Variantes personalizadas */
+/* Botón rosa claro (crear) */
+.btn-pink {
+  background-color: var(--rosa-claro); /* rosa claro inicial */
+  color: var(--negro);                 /* texto oscuro para contraste */
+  border: 2px solid var(--rosa-medio); /* borde rosa medio elegante */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-pink:hover {
+  background-color: var(--rosa-medio); /* rosa más oscuro al hover */
+  color: var(--blanco);                /* texto blanco para contraste */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+.btn-black {
+  background-color: var(--negro);
+  color: var(--blanco);
+  border: none;
+}
+.btn-black:hover {
+  background-color: #333;
+}
+
+.btn-white-pink {
+  background-color: var(--blanco);
+  color: var(--rosa-medio);
+  border: 2px solid var(--rosa-medio);
+}
+.btn-white-pink:hover {
+  background-color: var(--rosa-medio);
+  color: var(--blanco);
+}
+
+
+/* 🖼️ Imágenes */
+img {
+  border-radius: 6px;
+  border: 1px solid var(--rosa-oscuro);
+  padding: 2px;
+  background-color: var(--blanco);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .card {
+    margin: 10px;
+  }
+
+  .card-header {
+    font-size: 1.1em;
+    text-align: center;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
