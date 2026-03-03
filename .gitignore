@@ -1,0 +1,50 @@
+# ============================
+# ARCHIVOS SENSIBLES / CLAVES
+# ============================
+private/config.php
+config_local.php
+*.key
+*.pem
+*.env
+
+# ============================
+# ARCHIVOS DE ENTORNO LOCAL
+# ============================
+# Configuraciones de XAMPP / Apache
+xampp/
+apache/
+php/
+
+# ============================
+# ARCHIVOS TEMPORALES
+# ============================
+*.log
+*.tmp
+*.cache
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# ============================
+# CARPETAS DE DESARROLLO
+# ============================
+node_modules/
+vendor/
+dist/
+build/
+
+# ============================
+# ARCHIVOS DEL EDITOR
+# ============================
+.vscode/
+.idea/
+*.code-workspace
+
+# ============================
+# BACKUPS
+# ============================
+backup/
+*.zip
+*.rar
+*.7z
