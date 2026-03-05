@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (swiper) {
             swiper.destroy(true, true);
             swiper = null;
+            window.swiper = null;
         }
 
         // Resetear clases de diseño del contenedor
@@ -67,6 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     768: { slidesPerView: 3 }
                 }
             });
+
+            // Hacer accesible el swiper globalmente
+            window.swiper = swiper;
+
         } else if (cantidad > 0) {
             // --- MODO CUADRÍCULA (1 a 3 productos) ---
             swiperContainer.classList.add('carrusel-desactivado');
@@ -83,17 +88,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = limpiarTexto(inputBusqueda.value);
         const selectedCat = selectCat.value;
 
-        // Ocultar suavemente mientras filtramos
         wrapper.style.opacity = '0';
 
-        // Usamos un pequeño delay para que la transición sea fluida
         setTimeout(() => {
             wrapper.innerHTML = '';
 
             const filtrados = slidesOriginales.filter(slide => {
-                // Buscamos texto en la descripción
                 const desc = limpiarTexto(slide.querySelector('.text-muted').textContent);
-                // Buscamos texto en el nombre (atributo data-nombre)
                 const nombre = limpiarTexto(slide.getAttribute('data-nombre'));
                 const cat = slide.getAttribute('data-categoria');
 
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 200);
     }
 
-    // 4. Listeners (Eventos en tiempo real)
+    // 4. Listeners
     inputBusqueda.addEventListener('input', filtrar);
     selectCat.addEventListener('change', filtrar);
     
@@ -140,43 +141,32 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-document.getElementById('formContacto').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const form = this;
-    const btn = form.querySelector('button');
-    const mensajeExito = document.getElementById('mensajeExito');
-    const formData = new FormData(form);
 
-    // Cambiamos el estado del botón
-    btn.innerHTML = "Enviando...";
-    btn.disabled = true;
+// -----------------------------
+//  MODAL + PAUSA DEL CARRUSEL
+// -----------------------------
 
-    fetch('enviar_contacto.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Archivo no encontrado (404) o error de servidor');
-        }
-        return response.text();
-    })
-    .then(data => {
-		if (data.trim() === "OK") {
-            form.style.display = 'none';
-            mensajeExito.classList.remove('d-none');
-        } else {
-            console.error("Respuesta del servidor:", data);
-            alert("El servidor recibió los datos pero no pudo enviar el correo.");
-            btn.innerHTML = "Reintentar";
-            btn.disabled = false;
-        }
-    })
-    .catch(error => {
-        console.error("Error en la petición:", error);
-        alert("Error de conexión: Verifica que 'enviar_contacto.php' esté en la carpeta principal.");
-        btn.innerHTML = "Error de envío";
-        btn.disabled = false;
-    });
+document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("pendinail-img")) {
+        const imgSrc = e.target.getAttribute("src");
+        document.getElementById("modalImage").setAttribute("src", imgSrc);
+
+        const modal = new bootstrap.Modal(document.getElementById("imageModal"));
+        modal.show();
+    }
+});
+
+// Pausar y reanudar Swiper al abrir/cerrar modal
+const modalEl = document.getElementById("imageModal");
+
+modalEl.addEventListener("show.bs.modal", () => {
+    if (window.swiper && window.swiper.autoplay) {
+        window.swiper.autoplay.stop();
+    }
+});
+
+modalEl.addEventListener("hidden.bs.modal", () => {
+    if (window.swiper && window.swiper.autoplay) {
+        window.swiper.autoplay.start();
+    }
 });

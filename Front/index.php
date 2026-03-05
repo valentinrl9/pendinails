@@ -124,7 +124,10 @@ function normalizar_v_js($texto) {
                 ?>
                 <div class="swiper-slide" data-categoria="<?= $catData ?>" data-nombre="<?= $nomData ?>">
                     <div class="producto-slide-content p-3 border rounded shadow-sm bg-white text-center h-100">
-                        <img src="<?= $row['imagen_url'] ?>" class="img-fluid mb-3 rounded" style="height:220px; object-fit:cover;" alt="<?= $row['nombre'] ?>">
+                        <img src="<?= $row['imagen_url'] ?>" 
+                            class="img-fluid mb-3 rounded pendinail-img"
+                            style="height:220px; object-fit:cover;" 
+                            alt="<?= $row['nombre'] ?>">
                         <h5 class="fw-bold"><?= $row['nombre'] ?></h5>
                         <p class="text-muted small"><?= $row['descripcion'] ?></p>
                         <p class="text-dark fw-bold"><?= number_format($row['precio'], 2) ?> €</p>
@@ -206,9 +209,25 @@ function normalizar_v_js($texto) {
     </div>
 </footer>
 
+<!-- Modal para ver imagen ampliada -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content bg-dark">
+      <div class="modal-body p-0">
+        <img id="modalImage"
+            src=""
+            class="img-fluid"
+            style=" object-fit: contain; border: 4px solid #d4af37; border-radius: 10px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="scriptv2.js?v=1"></script>
+
 
 </body>
 </html>
