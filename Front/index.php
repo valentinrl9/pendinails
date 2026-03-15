@@ -15,6 +15,24 @@ function normalizar_v_js($texto) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    
+            <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVQYDV4NY3"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-XVQYDV4NY3');
+        </script>
+    
+            <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NHJWBSP8');</script>
+        <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PendiNails - Joyas únicas</title>
@@ -29,6 +47,11 @@ function normalizar_v_js($texto) {
 
 <body>
 
+            <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHJWBSP8"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);">
     <div class="container">
         <a class="navbar-brand" href="#">PendiNails</a>
@@ -59,7 +82,7 @@ function normalizar_v_js($texto) {
             <div class="col-12 col-md-5 text-center">
                 <div class="hero-content">
                     <h1>PendiNails</h1>
-                    <p>Transformamos lo cotidiano en arte artesanal único.</p>
+                    <p>Joyas únicas elaboradas con uñas sintéticas, transformadas artesanalmente en piezas exclusivas.</p>
                     <a href="#destacados" class="btn-elegante">Ver catálogo</a>
                 </div>
             </div>
