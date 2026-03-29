@@ -26,6 +26,17 @@ function normalizar_v_js($texto) {
           gtag('config', 'G-XVQYDV4NY3');
         </script>
     
+        <!-- Icono general -->
+        <link rel="icon" type="image/png" href="front/img/logo.png">
+
+        <!-- Icono para Apple (iPhone/iPad) -->
+        <link rel="apple-touch-icon" href="front/img/logo.png">
+
+        <!-- Manifest para Android / PWA -->
+        <link rel="manifest" href="manifest.json">
+        <meta name="theme-color" content="#000000">
+
+
             <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
