@@ -26,14 +26,14 @@ function normalizar_v_js($texto) {
           gtag('config', 'G-XVQYDV4NY3');
         </script>
     
-        <!-- Icono general -->
-        <link rel="icon" type="image/png" href="front/img/logo.png">
-
         <!-- Icono para Apple (iPhone/iPad) -->
-        <link rel="apple-touch-icon" href="front/img/logo.png">
+        <link rel="apple-touch-icon" href="img/logo-180.png">
+
+        <!-- Icono general -->
+        <link rel="icon" type="image/png" href="img/logo.png">
 
         <!-- Manifest para Android / PWA -->
-        <link rel="manifest" href="manifest.json">
+        <link rel="manifest" href="/Front/manifest.json">
         <meta name="theme-color" content="#000000">
 
 
