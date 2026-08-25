@@ -37,3 +37,25 @@ Esto es una prueba. Te gusta?
 
 ==========================================
 
+==========================================
+FECHA: 25-08-2026 16:35:36
+NUEVO MENSAJE RECIBIDO:
+Detalles del mensaje recibido el 25/08/2026 16:35:36:
+------------------------------------------
+Nombre: valentin prueba
+Email: valentinruizleon@gmail.com
+Mensaje:
+me gusta esta pieza
+------------------------------------------
+
+==========================================
+FECHA: 25-08-2026 16:49:10
+NUEVO MENSAJE RECIBIDO:
+Detalles del mensaje recibido el 25/08/2026 16:49:10:
+------------------------------------------
+Nombre: Valen prueba
+Email: valentinruizleon@gmail.com
+Mensaje:
+Esto es una prueba
+------------------------------------------
+

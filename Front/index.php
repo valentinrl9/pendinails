@@ -1,9 +1,6 @@
-<?php 
-// Conexión a la base de datos
-include("../config/db.php"); 
+<?php
+include("../config/db.php");
 
-// Función para normalizar textos (elimina espacios, tildes y caracteres especiales)
-// Esto garantiza que "Colección Rosas" se convierta en "coleccionrosas" para el ID de búsqueda.
 function normalizar_v_js($texto) {
     $texto = mb_strtolower($texto, 'UTF-8');
     $buscar = array('á', 'é', 'í', 'ó', 'ú', 'ñ', ' ');
@@ -11,257 +8,201 @@ function normalizar_v_js($texto) {
     $texto = str_replace($buscar, $reemplazar, $texto);
     return preg_replace('/[^a-z0-9]/', '', $texto);
 }
+
+function imagen_web($ruta) {
+    if (!$ruta) return $ruta;
+    $webp = preg_replace('/\.(png|jpe?g)$/i', '.webp', $ruta);
+    if (is_file(__DIR__ . '/' . $webp)) return $webp;
+    return $ruta;
+}
+
+$whatsapp = '';
+$configPath = __DIR__ . '/../private/config.php';
+if (is_file($configPath)) {
+    require_once $configPath;
+    if (defined('WHATSAPP_NUMBER')) {
+        $whatsapp = preg_replace('/\D+/', '', (string) WHATSAPP_NUMBER);
+        if (strlen($whatsapp) === 9) {
+            $whatsapp = '34' . $whatsapp;
+        }
+    }
+}
+
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$base = $scheme . '://' . $_SERVER['HTTP_HOST'] . rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+$ogImage = $base . '/' . imagen_web('img/hero_pendinails.png');
+
+$productos = [];
+$categorias = [];
+if (isset($conn) && $conn) {
+    $catRes = $conn->query("SELECT DISTINCT c.nombre FROM categorias c INNER JOIN productos p ON c.id_categoria = p.categoria ORDER BY c.nombre ASC");
+    if ($catRes) {
+        while ($row = $catRes->fetch_assoc()) {
+            $categorias[] = $row['nombre'];
+        }
+    }
+    $pRes = $conn->query("SELECT p.*, c.nombre AS nombre_cat FROM productos p LEFT JOIN categorias c ON p.categoria = c.id_categoria ORDER BY p.id_producto DESC");
+    if ($pRes) {
+        while ($row = $pRes->fetch_assoc()) {
+            $productos[] = $row;
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    
-            <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVQYDV4NY3"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-XVQYDV4NY3');
-        </script>
-    
-        <!-- Icono para Apple (iPhone/iPad) -->
-        <link rel="apple-touch-icon" href="img/logo-180.png">
-
-        <!-- Icono general -->
-        <link rel="icon" type="image/png" href="img/logo.png">
-
-        <!-- Manifest para Android / PWA -->
-        <link rel="manifest" href="/Front/manifest.json">
-        <meta name="theme-color" content="#000000">
-
-
-            <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-NHJWBSP8');</script>
-        <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PendiNails - Joyas únicas</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>PendiNails · Joyas artesanales únicas</title>
+    <meta name="description" content="Joyas únicas elaboradas a mano con uñas sintéticas. Pendientes exclusivos de PendiNails, atelier en El Ejido, Almería.">
+    <link rel="canonical" href="<?= htmlspecialchars($base) ?>/index.php">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PendiNails · Joyas artesanales únicas">
+    <meta property="og:description" content="Piezas exclusivas hechas a mano. Encarga la tuya desde el catálogo.">
+    <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($base) ?>/index.php">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#090808">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="PendiNails">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylos.css">
 </head>
-
 <body>
+    <header class="nav">
+        <a class="brand" href="#inicio">
+            <img src="img/icon-192.png" alt="PendiNails">
+            <span>PendiNails</span>
+        </a>
+        <button class="menu-btn" type="button" aria-label="Abrir menú">☰</button>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#colecciones">Colecciones</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </header>
 
-            <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHJWBSP8"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-    
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);">
-    <div class="container">
-        <a class="navbar-brand" href="#">PendiNails</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="#inicio">Inicio</a>
-                <a class="nav-link" href="#destacados">Productos</a>
-                <a class="nav-link" href="#contacto">Contacto</a>
+    <section class="hero" id="inicio">
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <p class="eyebrow">Joyería artesanal</p>
+                <h1>Piezas<br><em>únicas</em></h1>
+                <p>Joyas elaboradas con uñas sintéticas, transformadas a mano en pendientes exclusivos.</p>
+                <a class="btn-gold" href="#colecciones">Ver catálogo</a>
+            </div>
+            <div class="hero-photo">
+                <img src="<?= htmlspecialchars(imagen_web('img/modeloPendiNails.png')) ?>" alt="Modelo luciendo un pendiente PendiNails" fetchpriority="high">
             </div>
         </div>
+    </section>
+
+    <section class="intro">
+        <p class="eyebrow">La firma</p>
+        <h2>Hecho a mano, para lucir</h2>
+        <div class="gold-line"></div>
+        <p>Cada pieza nace como una uña y se convierte en joya. Pocas unidades, acabado en oro y formas que no se repiten.</p>
+    </section>
+
+    <section class="catalog" id="colecciones">
+        <div class="intro" style="padding-top: 0;">
+            <h2>Nuestras colecciones</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="toolbar">
+            <div class="filters">
+                <button type="button" class="is-active" data-filter="todos">Todas</button>
+                <?php foreach ($categorias as $cat): ?>
+                    <button type="button" data-filter="<?= htmlspecialchars(normalizar_v_js($cat)) ?>"><?= htmlspecialchars($cat) ?></button>
+                <?php endforeach; ?>
+            </div>
+            <input type="search" id="buscarNombre" placeholder="Buscar por nombre" autocomplete="off">
+        </div>
+        <div class="grid" id="catalogoGrid">
+            <?php foreach ($productos as $p): ?>
+                <article class="card"
+                    data-categoria="<?= htmlspecialchars(normalizar_v_js($p['nombre_cat'] ?? 'sincategoria')) ?>"
+                    data-nombre="<?= htmlspecialchars(mb_strtolower(trim($p['nombre']), 'UTF-8')) ?>">
+                    <img src="<?= htmlspecialchars(imagen_web($p['imagen_url'])) ?>"
+                        class="pendinail-img"
+                        loading="lazy"
+                        alt="<?= htmlspecialchars($p['nombre']) ?>">
+                    <small><?= htmlspecialchars($p['nombre_cat'] ?? 'Colección') ?></small>
+                    <h3><?= htmlspecialchars($p['nombre']) ?></h3>
+                    <p><?= htmlspecialchars($p['descripcion']) ?></p>
+                    <div class="price"><?= number_format((float)$p['precio'], 2, ',', '.') ?> €</div>
+                    <button type="button" class="btn-gold btn-encargar" data-pieza="<?= htmlspecialchars($p['nombre']) ?>">Encargar esta pieza</button>
+                </article>
+            <?php endforeach; ?>
+            <p class="no-results" id="noResults">No se encontraron piezas coincidentes.</p>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="contact-wrap">
+            <p class="eyebrow">Atelier</p>
+            <h2>Contacto</h2>
+            <div class="gold-line"></div>
+            <p>¿Tienes alguna duda o quieres un diseño personalizado? Escríbenos a <a href="mailto:pendinails@gmail.com" style="color: var(--gold-soft);">pendinails@gmail.com</a> o usa el formulario.</p>
+
+            <form id="formContacto" action="enviar_contacto.php" method="POST">
+                <label class="hp" for="website">Web</label>
+                <input class="hp" type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                <input type="text" name="nombre" id="cNombre" placeholder="Nombre completo" required>
+                <input type="email" name="email" id="cEmail" placeholder="Correo electrónico" required>
+                <textarea name="mensaje" id="cMensaje" placeholder="¿En qué podemos ayudarte?" required></textarea>
+                <label class="wa-opt">
+                    <input type="checkbox" id="enviarWhatsapp" name="enviar_whatsapp" value="1">
+                    También enviar por WhatsApp (si lo tienes instalado)
+                </label>
+                <button type="submit" class="btn-gold" id="btnEnviar">Enviar mensaje</button>
+            </form>
+            <div id="mensajeExito" class="form-msg">Gracias. Hemos recibido tu mensaje y te responderemos lo antes posible.</div>
+            <div id="mensajeError" class="form-msg error">No se ha podido enviar. Escríbenos a pendinails@gmail.com.</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© <?= date('Y') ?> PendiNails · pendinails@gmail.com · El Ejido, Almería</p>
+        <div class="footer-links">
+            <a href="legal/aviso-legal.php">Aviso legal</a>
+            <a href="legal/privacidad.php">Privacidad</a>
+            <a href="legal/cookies.php">Cookies</a>
+            <a href="legal/condiciones.php">Condiciones</a>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" hidden>
+        <img id="lightboxImage" alt="Pieza PendiNails ampliada">
     </div>
-</nav>
 
-<a href="#inicio" class="scroll-top" id="scrollTopBtn" style="display:none; position:fixed; bottom:20px; right:20px; z-index:999;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffb6c1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="18 15 12 9 6 15" />
-    </svg>
-</a>
-
-
-
-<section id="inicio" class="hero mt-5 pt-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-12 col-md-5 text-center">
-                <div class="hero-content">
-                    <h1>PendiNails</h1>
-                    <p>Joyas únicas elaboradas con uñas sintéticas, transformadas artesanalmente en piezas exclusivas.</p>
-                    <a href="#destacados" class="btn-elegante">Ver catálogo</a>
-                </div>
-            </div>
-            <div class="col-12 col-md-7 text-center">
-                <img src="img/modeloPendiNails.png" alt="Pendientes" class="hero-img img-fluid">
-            </div>
+    <div class="cookie-banner" id="cookieBanner">
+        <span>Usamos cookies técnicas y, si lo aceptas, analíticas de Google para mejorar la web. <a href="legal/cookies.php">Más información</a>.</span>
+        <div class="cookie-actions">
+            <button type="button" class="btn-gold" id="cookieReject">Rechazar</button>
+            <button type="button" class="btn-gold" id="cookieAccept">Aceptar</button>
         </div>
     </div>
-</section>
 
+    <?php if ($whatsapp): ?>
+    <a class="whatsapp-fab" href="https://wa.me/<?= htmlspecialchars($whatsapp) ?>?text=<?= rawurlencode('Hola, me interesa una pieza de PendiNails.') ?>" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11 11 0 0 0 2.1 17.7L1 23l5.5-1.1A11 11 0 0 0 21 12a10.9 10.9 0 0 0-.5-8.5zM12 20.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.2.6.6-3.1-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.7.9-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.4.1-.3a1.4 1.4 0 0 0 0-.5c0-.1-.5-1.3-.7-1.8s-.4-.4-.5-.4h-.4a.8.8 0 0 0-.6.3 2.5 2.5 0 0 0-.8 1.9 4.4 4.4 0 0 0 .9 2.3 10 10 0 0 0 3.8 3.4 12.7 12.7 0 0 0 1.3.5 3.1 3.1 0 0 0 1.4.1 2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c-.1-.1-.2-.1-.4-.2z"/></svg>
+    </a>
+    <?php endif; ?>
 
-
-<section id="destacados" class="container my-5">
-    <h2 class="text-center mb-5">Nuestras Colecciones</h2>
-
-    <div class="card shadow-sm border-0 mb-5 bg-white p-4">
-        <div class="row g-3 align-items-center">
-            <div class="col-12 col-md-2">
-                <button id="btnTodos" class="btn btn-dark w-100 h-100 py-3">Ver Todos</button>
-            </div>
-            <div class="col-12 col-md-5">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="buscarNombre" placeholder="Buscar...">
-                    <label>Buscar por nombre</label>
-                </div>
-            </div>
-            <div class="col-12 col-md-5">
-                <div class="form-floating">
-                    <select class="form-select" id="filtroCategoria">
-                        <option value="todos" selected>Todas las categorías</option>
-                        <?php
-                        // Obtenemos los nombres de las categorías reales vinculadas a productos
-                        $sqlCat = "SELECT DISTINCT c.nombre 
-                                   FROM categorias c 
-                                   INNER JOIN productos p ON c.id_categoria = p.categoria 
-                                   ORDER BY c.nombre ASC";
-                        $catRes = $conn->query($sqlCat);
-                        while($cRow = $catRes->fetch_assoc()) {
-                            $nombreReal = $cRow['nombre'];
-                            $valJS = normalizar_v_js($nombreReal); // ej: "coleccionrosas"
-                            echo '<option value="'.$valJS.'">'.ucfirst($nombreReal).'</option>';
-                        }
-                        ?>
-                    </select>
-                    <label>Filtrar por colección</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="swiper" id="pendinailsSwiper" style="padding-bottom: 50px; transition: opacity 0.3s ease;">
-        <div class="swiper-wrapper" id="swiperWrapper">
-            <?php
-            // Traemos productos con el nombre de su categoría
-            $sqlProd = "SELECT p.*, c.nombre AS nombre_cat 
-                        FROM productos p 
-                        LEFT JOIN categorias c ON p.categoria = c.id_categoria";
-            $pRes = $conn->query($sqlProd);
-            while($row = $pRes->fetch_assoc()) {
-                $catData = normalizar_v_js($row['nombre_cat'] ?? 'sin-categoria');
-                $nomData = mb_strtolower(trim($row['nombre']), 'UTF-8');
-                ?>
-                <div class="swiper-slide" data-categoria="<?= $catData ?>" data-nombre="<?= $nomData ?>">
-                    <div class="producto-slide-content p-3 border rounded shadow-sm bg-white text-center h-100">
-                        <img src="<?= $row['imagen_url'] ?>" 
-                            class="img-fluid mb-3 rounded pendinail-img"
-                            style="height:220px; object-fit:cover;" 
-                            alt="<?= $row['nombre'] ?>">
-                        <h5 class="fw-bold"><?= $row['nombre'] ?></h5>
-                        <p class="text-muted small"><?= $row['descripcion'] ?></p>
-                        <p class="text-dark fw-bold"><?= number_format($row['precio'], 2) ?> €</p>
-                        <!-- Boton de compra comentado hasta que se haga la funcionalidad online -->
-                        <!-- <a href="#comprar-<?= $row['id_producto'] ?>" class="btn btn-dark btn-sm px-4">Comprar</a> -->
-                    </div>
-                </div>
-            <?php } ?>
-        </div>      
-        <div class="swiper-button-prev text-dark"></div>
-        <div class="swiper-button-next text-dark"></div>
-        <div class="swiper-pagination"></div>
-    </div>
-
-    <div id="noResults" class="text-center d-none my-5 p-5 border rounded bg-light">
-        <h4 class="text-muted">No se encontraron productos coincidentes</h4>
-        <p>Prueba con otros filtros o pulsa "Ver Todos".</p>
-    </div>
-</section>
-
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="searchToast" class="toast align-items-center text-white bg-dark border-0" role="alert">
-        <div class="d-flex">
-            <div class="toast-body">Sin resultados para esta búsqueda.</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
-    </div>
-</div>
-
-<section id="contacto" class="contacto-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <div class="contacto-wrapper text-center">
-                    <h2 class="display-4 mb-3">Contacto</h2>
-                    <p class="mb-5">¿Tienes alguna duda o quieres un diseño personalizado? Escríbenos.</p>
-                    
-                    <form id="formContacto" action="enviar_contacto.php" method="POST" class="text-start">
-                        <div class="form-floating mb-3">
-                            <input type="text" name="nombre" class="form-control" id="cNombre" placeholder="Tu nombre" required>
-                            <label for="cNombre">Nombre completo</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control" id="cEmail" placeholder="nombre@ejemplo.com" required>
-                            <label for="cEmail">Correo electrónico</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <textarea name="mensaje" class="form-control" id="cMensaje" placeholder="Tu mensaje" style="height: 150px" required></textarea>
-                            <label for="cMensaje">¿En qué podemos ayudarte?</label>
-                        </div>
-                        <button type="submit" class="btn-elegante w-100 py-3">Enviar Mensaje</button>
-                    </form>
-
-                    <div id="mensajeExito" class="mt-4 p-3 border rounded d-none" style="background: rgba(255,255,255,0.9); border-color: #c2185b !important;">
-                        <h5 class="text-dark mb-0">¡Gracias! Hemos recibido tu mensaje.</h5>
-                        <small class="text-muted">Te responderemos lo antes posible.</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<footer class="bg-dark text-white text-center py-4 mt-5">
-    <div class="container">
-        <p class="mb-1">© 2025 PendiNails · pendinails@gmail.com</p>
-
-        <div class="d-flex justify-content-center gap-3 small mt-2">
-            <a href="legal/aviso-legal.php" target="_blank" class="text-white-50 text-decoration-none">Aviso Legal</a>
-            <span class="text-white-50">|</span>
-            <a href="legal/privacidad.php" target="_blank" class="text-white-50 text-decoration-none">Política de Privacidad</a>
-            <span class="text-white-50">|</span>
-            <a href="legal/cookies.php" target="_blank" class="text-white-50 text-decoration-none">Política de Cookies</a>
-            <span class="text-white-50">|</span>
-            <a href="legal/condiciones.php" target="_blank" class="text-white-50 text-decoration-none">Condiciones de Venta</a>
-        </div>
-    </div>
-</footer>
-
-<!-- Modal para ver imagen ampliada -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content bg-dark">
-      <div class="modal-body p-0">
-        <img id="modalImage"
-            src=""
-            class="img-fluid"
-            style=" object-fit: contain; border: 4px solid #d4af37; border-radius: 10px;">
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="scriptv2.js?v=1"></script>
-
-
+    <script>
+        window.PENDINAILS_WA = <?= json_encode($whatsapp) ?>;
+    </script>
+    <script src="scriptv2.js?v=4"></script>
 </body>
 </html>
