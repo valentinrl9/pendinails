@@ -1,4 +1,7 @@
 <?php
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 include("../config/db.php");
 
 function normalizar_v_js($texto) {
@@ -77,7 +80,7 @@ if (isset($conn) && $conn) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="stylos.css">
+    <link rel="stylesheet" href="stylos.css?v=5">
 </head>
 <body>
     <header class="nav">
@@ -203,6 +206,6 @@ if (isset($conn) && $conn) {
     <script>
         window.PENDINAILS_WA = <?= json_encode($whatsapp) ?>;
     </script>
-    <script src="scriptv2.js?v=4"></script>
+    <script src="scriptv2.js?v=5"></script>
 </body>
 </html>
