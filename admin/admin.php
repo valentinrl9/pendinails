@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../config/security.php';
+pendinails_bootstrap();
 session_start();
 include("../config/db.php"); // conexión a la base de datos
 

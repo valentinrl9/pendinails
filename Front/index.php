@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../config/security.php';
+pendinails_bootstrap();
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
@@ -31,7 +33,7 @@ if (is_file($configPath)) {
     }
 }
 
-$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$scheme = pendinails_public_scheme();
 $base = $scheme . '://' . $_SERVER['HTTP_HOST'] . rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
 $ogImage = $base . '/' . imagen_web('img/hero_pendinails.png');
 
