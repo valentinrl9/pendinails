@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/../config/security.php';
+pendinails_bootstrap();
+
 /**
  * PendiNails - Envío de formulario de contacto
  * Email (Brevo o PHPMailer) es el canal principal. WhatsApp es opcional en el navegador.

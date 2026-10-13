@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../config/security.php';
+pendinails_bootstrap();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
