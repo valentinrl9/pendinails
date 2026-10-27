@@ -46,9 +46,15 @@ pendinails_bootstrap();
         Estas cookies son de terceros (Google) y no se activan hasta que pulsas «Aceptar».
     </p>
     <ul>
-        <li>Google Analytics: identificador <strong>G-XVQYDV4NY3</strong></li>
+        <li>Google Analytics: identificador <strong>G-7R0HMKDWNP</strong></li>
         <li>Google Tag Manager: identificador <strong>GTM-NHJWBSP8</strong></li>
     </ul>
+
+    <h3>Medición propia</h3>
+    <p>
+        El recuento interno de visitas y de escaneos del cartel no usa cookies.
+        Se anota solo el número de aperturas, sin identificar a quien entra.
+    </p>
 
     <h3>Cookies que no utilizamos</h3>
     <ul>

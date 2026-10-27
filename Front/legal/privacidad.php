@@ -35,6 +35,14 @@ pendinails_bootstrap();
         <strong>Ubicación:</strong> El Ejido, Almería (España)
     </p>
 
+    <h3>Estadísticas de la web</h3>
+    <p>
+        El sitio cuenta, en su propio servidor, cuántas veces se abre una página y cuántas veces
+        se usa el enlace del cartel. No se guarda el nombre, el correo, la dirección IP ni una cookie
+        para este recuento, así que no identifica a la persona. Sirve solo para saber si el cartel
+        y la web se están usando.
+    </p>
+
     <h3>Datos que se Recogen</h3>
     <p>
         A través del formulario de contacto se recogen los siguientes datos:

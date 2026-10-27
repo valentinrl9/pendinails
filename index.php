@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/config/security.php';
 pendinails_bootstrap();
-header("Location: Front/index.php");
+$consulta = str_replace(["\r", "\n"], '', (string)($_SERVER['QUERY_STRING'] ?? ''));
+$destino = 'Front/index.php' . ($consulta !== '' ? '?' . $consulta : '');
+header('Location: ' . $destino);
 exit;

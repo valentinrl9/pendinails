@@ -5,6 +5,14 @@ header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
 include("../config/db.php");
+require_once __DIR__ . '/../config/visitas.php';
+if (isset($conn) && $conn instanceof mysqli) {
+    $origen = $_GET['origen'] ?? '';
+    if (is_string($origen) && $origen === 'cartel') {
+        pendinails_registrar_visita($conn, 'qr');
+    }
+    pendinails_registrar_visita($conn, 'visita');
+}
 
 function normalizar_v_js($texto) {
     $texto = mb_strtolower($texto, 'UTF-8');
@@ -208,6 +216,6 @@ if (isset($conn) && $conn) {
     <script>
         window.PENDINAILS_WA = <?= json_encode($whatsapp) ?>;
     </script>
-    <script src="scriptv2.js?v=5"></script>
+    <script src="scriptv2.js?v=6"></script>
 </body>
 </html>
