@@ -151,10 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
         window.gtag = gtag;
         const ga = document.createElement('script');
         ga.async = true;
-        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-XVQYDV4NY3';
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-7R0HMKDWNP';
         document.head.appendChild(ga);
         gtag('js', new Date());
-        gtag('config', 'G-XVQYDV4NY3');
+        gtag('config', 'G-7R0HMKDWNP');
 
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];

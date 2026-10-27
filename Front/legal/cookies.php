@@ -46,7 +46,7 @@ pendinails_bootstrap();
         Estas cookies son de terceros (Google) y no se activan hasta que pulsas «Aceptar».
     </p>
     <ul>
-        <li>Google Analytics: identificador <strong>G-XVQYDV4NY3</strong></li>
+        <li>Google Analytics: identificador <strong>G-7R0HMKDWNP</strong></li>
         <li>Google Tag Manager: identificador <strong>GTM-NHJWBSP8</strong></li>
     </ul>
 

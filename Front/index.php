@@ -216,6 +216,6 @@ if (isset($conn) && $conn) {
     <script>
         window.PENDINAILS_WA = <?= json_encode($whatsapp) ?>;
     </script>
-    <script src="scriptv2.js?v=5"></script>
+    <script src="scriptv2.js?v=6"></script>
 </body>
 </html>
