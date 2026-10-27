@@ -50,6 +50,12 @@ pendinails_bootstrap();
         <li>Google Tag Manager: identificador <strong>GTM-NHJWBSP8</strong></li>
     </ul>
 
+    <h3>Medición propia</h3>
+    <p>
+        El recuento interno de visitas y de escaneos del cartel no usa cookies.
+        Se anota solo el número de aperturas, sin identificar a quien entra.
+    </p>
+
     <h3>Cookies que no utilizamos</h3>
     <ul>
         <li>Cookies de publicidad o remarketing</li>

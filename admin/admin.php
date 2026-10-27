@@ -184,6 +184,7 @@ $productos = $conn->query("SELECT p.*, c.nombre AS categoria_nombre
   <link rel="stylesheet" href="estiloAdmin.css">
 </head>
 <body>
+  <p><a href="estadisticas.php">Ver visitas de la web y escaneos del cartel</a></p>
 
   <!-- Gestión de Categorías -->
   <div class="card m-3">
