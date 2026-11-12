@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>PendiNails — cartel</title>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("fonts/f1.woff2") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("fonts/f2.woff2") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("fonts/f0.woff2") format("truetype"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "Outfit"; src: url("fonts/f3.woff2") format("truetype"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Outfit"; src: url("fonts/f4.woff2") format("truetype"); font-weight: 500; font-style: normal; }
+
+    @page { size: A4 portrait; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 210mm;
+      height: 297mm;
+      background: #090808;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    main {
+      width: 210mm;
+      height: 297mm;
+      display: flex;
+      flex-direction: column;
+      background: #090808;
+      color: #F4EEE4;
+      overflow: hidden;
+    }
+    .hero {
+      width: 210mm;
+      height: 152mm;
+      object-fit: cover;
+      object-position: 46% 28%;
+      display: block;
+    }
+    .copy {
+      flex: 1;
+      padding: 9mm 13mm 10mm;
+      display: flex;
+      flex-direction: column;
+    }
+    .brand {
+      font-family: Outfit, sans-serif;
+      font-weight: 500;
+      font-size: 3.4mm;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: #D4B56A;
+    }
+    h1 {
+      margin-top: 3.2mm;
+      font-family: Cormorant, serif;
+      font-weight: 500;
+      font-size: 11.5mm;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+    h1 em {
+      display: block;
+      margin-top: 2.2mm;
+      font-style: italic;
+      font-weight: 500;
+      color: #E4C98A;
+      font-size: 18.2mm;
+      line-height: 0.88;
+    }
+    .line {
+      width: 18mm;
+      height: 0.35mm;
+      background: #D4B56A;
+      margin: 5mm 0 4mm;
+    }
+    .facts {
+      font-family: Outfit, sans-serif;
+      font-weight: 300;
+      font-size: 5.2mm;
+      letter-spacing: 0.01em;
+      color: #F4EEE4;
+    }
+    .price {
+      margin-top: 2mm;
+      display: flex;
+      align-items: baseline;
+      gap: 3mm;
+    }
+    .price strong {
+      font-family: Cormorant, serif;
+      font-weight: 600;
+      font-size: 16mm;
+      line-height: 0.9;
+      color: #E4C98A;
+    }
+    .price span {
+      font-family: Outfit, sans-serif;
+      font-weight: 300;
+      font-size: 5mm;
+    }
+    .ask {
+      margin-top: 5mm;
+      font-family: Cormorant, serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 8.2mm;
+      line-height: 1;
+    }
+    .foot {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 5mm;
+      padding-top: 4mm;
+    }
+    .foot img {
+      width: 24mm;
+      height: 24mm;
+      background: #F4EEE4;
+    }
+    .foot p {
+      font-family: Outfit, sans-serif;
+      font-weight: 300;
+      font-size: 3.7mm;
+      line-height: 1.35;
+      color: #C9BBA8;
+    }
+    .foot strong {
+      display: block;
+      font-weight: 500;
+      color: #F4EEE4;
+      font-size: 4.1mm;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="hero" src="../Front/img/modeloPendiNails.png" alt="Pendiente PendiNails puesto en la oreja">
+    <section class="copy">
+      <p class="brand">PendiNails</p>
+      <h1>Los de abajo<br>no son muestras.<em>Son pendientes.</em></h1>
+      <div class="line"></div>
+      <p class="facts">Hechos a mano, uno a uno.</p>
+      <p class="price"><strong>7 €</strong><span>el par</span></p>
+      <p class="ask">Pregúntame cuál te gusta.</p>
+      <div class="foot">
+        <img src="qr.png" alt="Código para ver los pendientes">
+        <p><strong>Míralos en el móvil</strong>mientras te hacen las uñas.<br>pendinails.com</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
